@@ -1,0 +1,8 @@
+{
+  "name": "Rudy's Bar - York Pub",
+  "version": 1,
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": ".",
+  "framework": "static",
+  "functions": {}
+}

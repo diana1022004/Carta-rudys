@@ -2,28 +2,155 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Rudy's Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rudy's Bar - York Pub | Cocteles & Música Rock</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 
 <body>
 
-  <header class="header">
-    <img src="assets/img/logo.png" class="logo">
-    <h1>RUDY'S BAR</h1>
-    <p>Rock - Alternativo - Noche</p>
+  <!-- SPLASH/INTRO SCREEN -->
+  <div id="splash" class="splash">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <img src="assets/img/logo.png" alt="Rudy's Bar Logo" class="logo-splash">
+      </div>
+      <h1 class="splash-title">RUDY'S BAR</h1>
+      <p class="splash-subtitle">YORK PUB</p>
+      <div class="splash-loader"></div>
+    </div>
+  </div>
 
-    <button onclick="toggleMusic()">Activar música</button>
-  </header>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="assets/img/logo.png" alt="Logo" class="logo-nav">
+      </div>
+      <h2 class="navbar-title">RUDY'S BAR</h2>
+      <div class="navbar-controls">
+        <button id="musicBtn" class="music-btn" title="Música">
+          <span class="music-icon">🔊</span>
+        </button>
+        <button class="menu-btn" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
 
-  <main id="menu"></main>
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu hidden">
+      <button onclick="scrollToSection('inicio')">Inicio</button>
+      <button onclick="scrollToSection('menu')">Menú</button>
+      <button onclick="openReservaModal()">Reserva</button>
+      <button onclick="scrollToSection('contacto')">Contacto</button>
+    </div>
+  </nav>
 
-  <div id="modal" class="modal hidden">
+  <!-- AUDIO PLAYER (HIDDEN) -->
+  <audio id="bgMusic" loop>
+    <source src="assets/audio/background.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+      <div class="hero-content">
+        <img src="assets/img/logo-large.png" alt="Logo" class="hero-logo">
+        <h1>RUDY'S BAR</h1>
+        <p>Cocteles Artesanales | Música Rock | Ambiente Alternativo</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToMenu()">Ver Menú</button>
+          <button class="btn btn-secondary" onclick="openReservaModal()">Reservar Mesa</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES TABS -->
+    <section id="menu" class="menu-section">
+      <h2>NUESTROS COCTELES</h2>
+      
+      <div class="tabs">
+        <button class="tab-btn active" onclick="filterCategory('todos')">Todos</button>
+        <button class="tab-btn" onclick="filterCategory('clasicos')">Clásicos</button>
+        <button class="tab-btn" onclick="filterCategory('autor')">De Autor</button>
+        <button class="tab-btn" onclick="filterCategory('sinlicor')">Sin Licor</button>
+        <button class="tab-btn" onclick="filterCategory('bebidas')">Bebidas</button>
+        <button class="tab-btn" onclick="filterCategory('comidas')">Comidas</button>
+      </div>
+
+      <!-- GALLERY -->
+      <div id="gallery" class="gallery"></div>
+    </section>
+
+    <!-- FOOTER/CONTACTO -->
+    <section id="contacto" class="footer-section">
+      <h2>Contacto & Ubicación</h2>
+      <p><strong>Dirección:</strong> Calle 5 #26-68 B/San Fernando, Cali - Colombia</p>
+      <p><strong>Instagram:</strong> @RUDYSPUBCALI</p>
+      <p><strong>Horario:</strong> Jueves - Domingo 8PM - 4AM</p>
+      <button class="btn btn-primary" onclick="openReservaModal()">Hacer Reserva</button>
+    </section>
+
+  </main>
+
+  <!-- MODAL: DETALLE PRODUCTO -->
+  <div id="productModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeModal()"></div>
     <div class="modal-content">
-      <h2 id="modal-title"></h2>
-      <p id="modal-description"></p>
-      <span id="modal-price"></span>
-      <button onclick="closeModal()">Cerrar</button>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <img id="modalImage" src="" alt="">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <div class="modal-ingredients">
+        <h3>Ingredientes:</h3>
+        <p id="modalIngredients"></p>
+      </div>
+      <div class="modal-footer">
+        <span id="modalPrice" class="price"></span>
+        <button class="btn btn-primary" onclick="closeModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RESERVA -->
+  <div id="reservaModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeReservaModal()"></div>
+    <div class="modal-content modal-reserva">
+      <button class="close-btn" onclick="closeReservaModal()">&times;</button>
+      <h2>Haz tu Reserva</h2>
+      <form id="reservaForm" onsubmit="submitReserva(event)">
+        <input type="text" placeholder="Tu nombre" required>
+        <input type="email" placeholder="Tu email" required>
+        <input type="tel" placeholder="Tu teléfono" required>
+        <input type="date" required>
+        <input type="time" required>
+        <select required>
+          <option value="">Número de personas</option>
+          <option value="1">1 persona</option>
+          <option value="2">2 personas</option>
+          <option value="4">4 personas</option>
+          <option value="6">6 personas</option>
+          <option value="8">8 personas</option>
+          <option value="mas">Más de 8</option>
+        </select>
+        <textarea placeholder="Notas adicionales (opcional)"></textarea>
+        <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+      </form>
+      <p class="form-note">Recibirás confirmación por email</p>
+    </div>
+  </div>
+
+  <!-- MUSIC CONTROLLER FLOATING -->
+  <div class="music-controller">
+    <button id="playPauseBtn" onclick="toggleMusic()" class="play-btn">
+      <span class="play-icon">▶</span>
+    </button>
+    <div class="volume-control">
+      <input type="range" id="volumeSlider" min="0" max="100" value="50" onchange="setVolume(this.value)">
     </div>
   </div>
 
