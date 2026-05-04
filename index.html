@@ -3,49 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Rudy's Bar</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-  <header class="hero">
-    <h1>🍸 RUDY'S BAR</h1>
-    <p>La mejor experiencia nocturna en la ciudad</p>
+  <header class="header">
+    <img src="assets/img/logo.png" class="logo">
+    <h1>RUDY'S BAR</h1>
+    <p>Rock - Alternativo - Noche</p>
+
+    <button onclick="toggleMusic()">Activar música</button>
   </header>
 
-  <section class="menu">
+  <main id="menu"></main>
 
-    <h2>🥂 Bebidas</h2>
-
-    <div class="grid">
-
-      <div class="card">
-        <h3>Mojito</h3>
-        <p>Ron, hierbabuena, limón</p>
-        <strong>$25.000</strong>
-      </div>
-
-      <div class="card">
-        <h3>Gin Tonic</h3>
-        <p>Ginebra premium + tónica</p>
-        <strong>$30.000</strong>
-      </div>
-
-      <div class="card">
-        <h3>Tequila Sunrise</h3>
-        <p>Tequila, naranja, granadina</p>
-        <strong>$28.000</strong>
-      </div>
-
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <span id="modal-price"></span>
+      <button onclick="closeModal()">Cerrar</button>
     </div>
+  </div>
 
-  </section>
-
-  <footer>
-    <p>📍 Cali, Colombia | Abierto 6pm - 4am</p>
-  </footer>
-
-  <button onclick="cambiarModo()">🌙 Modo Neón</button>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/music.js"></script>
 
 </body>
 </html>
