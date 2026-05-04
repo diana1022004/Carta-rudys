@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px;
+  background: linear-gradient(45deg, #ff0055, #7700ff);
+}
+
+.menu {
+  padding: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+}
+.neon {
+  background: black;
+  color: #00ffcc;
+}
