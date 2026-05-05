@@ -154,14 +154,42 @@ function closeReservaModal() {
 
 function submitReserva(e) {
   e.preventDefault();
+  
   const form = e.target;
-  const formData = new FormData(form);
+  const nombre = form.querySelector('input[type="text"]').value;
+  const email = form.querySelector('input[type="email"]').value;
+  const telefono = form.querySelector('input[type="tel"]').value;
+  const fecha = form.querySelectorAll('input[type="date"]')[0].value;
+  const hora = form.querySelectorAll('input[type="time"]')[0].value;
+  const personas = form.querySelector('select').value;
+  const notas = form.querySelector('textarea').value;
 
-  // Aquí puedes enviar los datos a un servidor o servicio
-  // Por ahora, mostramos un mensaje de éxito
-  alert('¡Reserva confirmada! Recibirás un email de confirmación pronto. 🎉');
-  closeReservaModal();
-  form.reset();
+  // Enviar a Formspree
+  fetch('https://formspree.io/f/mzdoregn', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nombre,
+      email,
+      telefono,
+      fecha,
+      hora,
+      personas,
+      notas
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert('¡Reserva confirmada! Recibirás un email en breve 🎉');
+    closeReservaModal();
+    form.reset();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Hubo un error. Intenta de nuevo.');
+  });
 }
 
 // ============================================

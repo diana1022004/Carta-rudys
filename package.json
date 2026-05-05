@@ -1,0 +1,25 @@
+{
+  "name": "rudys-bar-web",
+  "version": "1.0.0",
+  "description": "Sitio web interactivo para Rudy's Bar - York Pub",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000 || npx http-server",
+    "dev": "npx live-server",
+    "build": "echo 'No build needed for static site'"
+  },
+  "keywords": [
+    "bar",
+    "rock",
+    "alternativo",
+    "cocteles",
+    "cali",
+    "vercel"
+  ],
+  "author": "Rudy's Bar",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.0",
+    "live-server": "^1.2.1"
+  }
+}
